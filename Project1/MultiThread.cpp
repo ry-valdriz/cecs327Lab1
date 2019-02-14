@@ -13,56 +13,61 @@ using namespace std;
 #define NUM_THREADS 9
 
 
-void *matrix_mult(void *t) {
-
-}
+//void *matrix_mult(void *t) {
+//
+//}
 
 int main (int argc, char *argv[]) {
-  int arr1[9];
-  int arr2[9];
-
-  string inFileName1 = "";
-  string inFileName2 = "";
-  ofstream outStream;
-
-  Scanner scanner1;
-  Scanner scanner2;
-
-  string element = "";
-
-  Utils::CheckArgs(2, argc, argv, "infilename1 (first matrix) infilename2 (second matrix)");
-  inFileName1 = static_cast<string>(argv[1]);
-  inFileName2 = static_cast<string>(argv[2]);
-
-  scanner1.openFile(inFileName1);
-  scanner2.openFile(inFileName2);
-
-
-  int i = 0;
-
-  while (scanner1.hasNext()) {
-    arr1[i] = stoi(scanner1.next());
-    i++;
-  }
-
-  i=0;
-  while(scanner2.hasNext()){
-    arr2[i] = stoi(scanner2.next());
-    i++;
-  }
-
-  cout << "Array 1: " ;
-  for(int x = 0; x < 9; x++){ //check if scanning documents correctly
-    cout << arr1[x] << " ";
-  }
-
-  cout<< "\nArray 2: ";
-  for(int x = 0; x < 9; x++){
-    cout << arr2[x] << " ";
-  }
-
-  cout << ""<<endl;
-  return 0;
-
-
+    string inFileName1 = "";
+    string inFileName2 = "";
+    ofstream outStream;
+    
+    Scanner scanner1;
+    Scanner scanner2;
+    
+    Utils::CheckArgs(2, argc, argv, "infilename (first matrix) outfilename (second matrix)");
+    inFileName1 = static_cast<string>(argv[1]);
+    inFileName2 = static_cast<string>(argv[2]);
+    
+    scanner1.openFile(inFileName1);
+    scanner2.openFile(inFileName2);
+    
+    int first_input[3][3];
+    int second_input[3][3];
+    
+    int row =0;
+    int column =0;
+    while (scanner1.hasNext()) {
+        
+        first_input[row][column] = stoi(scanner1.next());
+        column = (column+1)%3;
+        if (column ==0){
+            row++;
+        }
+    }
+    
+    while (scanner2.hasNext()) {
+        
+        second_input[row][column] =  stoi(scanner1.next());
+        column = (column+1)%3;
+        if (column ==0){
+            row++;
+        }
+    }
+    
+    for(int i =0; i<3 ; i++){
+        for(int j =0; j<3 ; j++){
+            cout<<first_input[i][j];
+        }
+        cout<<endl;
+    }
+    cout<<endl;
+    for(int i =0; i<3 ; i++){
+        for(int j =0; j<3 ; j++){
+            cout<<second_input[i][j];
+        }
+        cout<<endl;
+    }
+    
 }
+
