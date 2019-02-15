@@ -3,6 +3,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -102,8 +103,16 @@ int main (int argc, char *argv[]) {
     }
     sleep(1);
     
-    for(int i= 0; i<NUM_THREADS;i++){
-        cout<<result_matrix[i]<<endl;
+    ofstream output ("outpur.txt");
+    
+    if(output.is_open()){
+        for(int i= 0; i<9;i++){
+            
+            if(i%3 == 0 && i !=0) output<<"\n";
+            output<<result_matrix[i]<<"  ";
+        }
+        cout<<endl;
+        output.close();
     }
     
     return 0;
